@@ -21,8 +21,8 @@ DESC
     fp = Tempfile.new('puppet-nw')
     begin
       fp.write(self.to_yaml)
-      CMD [REPLACE] = fp.path
-      ret = %x(CMD)
+      cmd = CMD.gsub(REPLACE, fp.path)
+      ret = %x(cmd)
     ensure
       fp.close
       fp.unlink
